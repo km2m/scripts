@@ -345,8 +345,8 @@ download_and_extract_bootstrap
 configure_chroot
 save_root_pass
 backup_old_files
-install_packages
 delete_all
+install_packages
 restore_root_pass
 cleanup
 configure_bootloader
