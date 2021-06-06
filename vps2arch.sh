@@ -79,10 +79,9 @@ chroot_exec() {
 
 configure_chroot() {
 	local m
-	#for m in $mirrors; do
-	#	echo 'Server = '"$m"'/$repo/os/$arch'
-	#done >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
-	echo "Server = https://free.nchc.org.tw/arch/\$repo/os/\$arch" >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
+	for m in $mirrors; do
+		echo 'Server = '"$m"'/$repo/os/$arch'
+	done >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
 	# Install and initialize haveged if needed
 	if ! is_openvz && ! pidof haveged >/dev/null; then
 		# Disable signature check, install and launch haveged and re-enable signature checks.
@@ -91,7 +90,7 @@ configure_chroot() {
 		mv "/root.$cpu_type/etc/pacman.conf.bak" "/root.$cpu_type/etc/pacman.conf"
 	fi
 	chroot_exec 'pacman-key --init && pacman-key --populate archlinux'
-	# chroot_exec 'pacman --noconfirm -Sy awk'
+	chroot_exec 'pacman --noconfirm -Sy awk'
 	# Generate fstab
 	chroot_exec 'genfstab /mnt >> /etc/fstab'
 
