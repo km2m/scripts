@@ -82,7 +82,7 @@ configure_chroot() {
 	#for m in $mirrors; do
 	#	echo 'Server = '"$m"'/$repo/os/$arch'
 	#done >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
-	echo "Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch" >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
+	echo "Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/\$repo/os/\$arch" >> "/root.$cpu_type/etc/pacman.d/mirrorlist"
 	# Install and initialize haveged if needed
 	if ! is_openvz && ! pidof haveged >/dev/null; then
 		# Disable signature check, install and launch haveged and re-enable signature checks.
